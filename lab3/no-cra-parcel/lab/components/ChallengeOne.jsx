@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 //import images
 
+import LookLeft from '../assets/look-left.jpeg'
+import LookRight from '../assets/look-right.jpeg'
+
 class ChallengeOne extends Component {
   //declare the state here
-  state = {
-  };
+  constructor(){
+    super()
+      this.btnClickHandler = this.btnClickHandler.bind(this)
+  }
+  
 
   //click left/right button handler goes here
+  state = {
+    lookLeft: undefined
+  };
+
+
+  btnClickHandler(arg){
+    this.setState({ lookLeft: arg })
+  }
 
   render() {
     return (
@@ -15,12 +29,12 @@ class ChallengeOne extends Component {
         <div className="msg">
           <img
             className="ch1"
-            src=""
+            src={this.state.lookLeft ? LookLeft : LookRight}
             alt=""
           />
         </div>
-        <button className="btn">⭠</button>
-        <button className="btn">⭢</button>
+        <button onClick ={() => this.btnClickHandler(true)} className="btn">⭠</button>
+        <button onClick ={() => this.btnClickHandler(false)} className="btn">⭢</button>
       </>
     );
   }

@@ -1,18 +1,37 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './styles.css'
+import React from "react";
+import ReactDOM from "react-dom";
+import "./styles.css";
 
-class App extends React.Component{
+import ChallengeOne from "./components/ChallengeOne";
+import ChallengeTwo from "./components/ChallengeTwo";
 
-    render(){
-        return (
-          <div className="App">
-            <h1>React Lab 102</h1>
-            {/* Import Components (ChallengeOne and Challenge Two) here */}
-          </div>
-        );
-      }
+class App extends React.Component {
+  state = {
+    hide: false,
+  };
+
+  toggle = () => {
+    this.setState({ hide: !this.state.hide });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <h1>React Lab 102</h1>
+        <button onClick={this.toggle} className="btn large">
+          Toggle
+        </button>
+
+        {this.state.hide && (
+          <>
+            <ChallengeOne />
+            <ChallengeTwo />
+          </>
+        )}
+      </div>
+    );
+  }
 }
 
-const rootNode = document.getElementById('root')
-ReactDOM.render(<App />, rootNode)
+const rootNode = document.getElementById("root");
+ReactDOM.render(<App />, rootNode);

@@ -11,32 +11,64 @@ const studentList = [
 ]
 
 export default class ChallengeTwo extends Component {
+
+  constructor(){
+    super()
+    this.timer = null
+  }
   //declare the states
   state = {
-    arr: []
+    arr: [],
+    isLoading: false
   }
 
   //componentDidMount will execute when the page has loaded (this will only run once)
   componentDidMount() {
     //display the student list after 3 seconds
+    // console.log("Loaded!")
+    this.setState({isLoading: true})
+
+    this.timer = setTimeout(() => {
+      this.setState({arr: studentList, isLoadind: false})
+    }, 3000)
+  }
+
+  // componentDidCatch(){
+  //   console.log("Updated!")
+  // }
+
+  shuffle = a => {
+    for(let i = a.length -1; i > 0; i --){
+      const j = Math.floor(Math.random() * ( i + 1));
+      [a[i], a[j]] = [a[j], a[i]]
+    }
+    return a
   }
 
   //random button handler
   randomize = () => {
     //shuffle the array and set the state
-
+    const newArr = this.shuffle(this.state.arr)
+    this.setState({arr: newArr})
   }
 
   render() {
+
+    const {arr, isLoadind} =this.state
     return (
       <>
         <h2>Challenge 2</h2>
         <div className='msg'>
+          {
+            isLoadind && (<p>Loading ....</p>)
+          }
           <ul>
             {/* display the list of students by iterating through the array */}
+            {arr.length > 0 && arr.map((student, index) =>
+            <li key={index}>{student}</li>)}
           </ul>
         </div>
-        <button className='btn large'>Randomize</button>
+        <button onClick={this.randomize} className='btn large'>Randomize</button>
       </>
     )
   }
