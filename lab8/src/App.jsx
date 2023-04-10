@@ -9,7 +9,6 @@ function App() {
       <Header>
         <h1>Todos</h1>
         <p>A simple todo app</p>
-        <Modal />
       </Header>
       <TodoApp />
     </>
